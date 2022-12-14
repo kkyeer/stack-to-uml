@@ -1,9 +1,8 @@
 package com.kkyeer.stack.to.uml.core;
 
-import com.kkyeer.stack.to.uml.core.helper.InvocationChainToPlantUmlHelper;
 import com.kkyeer.stack.to.uml.core.model.Invocation;
 import com.kkyeer.stack.to.uml.core.model.InvokeChain;
-import com.kkyeer.stack.to.uml.core.helper.InvocationToSvg;
+import com.kkyeer.stack.to.uml.core.helper.InvocationToImage;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,13 +26,10 @@ public class POC {
         //         "Alice <-- Bob: Another authentication Response\n" +
         //         "@enduml";
         InvokeChain invokeChain = genInvokeChain();
-        File svgFile = new File("abc.svg");
-        FileOutputStream fos = new FileOutputStream(svgFile);
-        InvocationToSvg.printInvocationUmlToOutputStream(invokeChain, fos);
-        fos.close();
+        File imgFile = InvocationToImage.generateRandomFile(invokeChain);
 
         // The XML is stored into svg
-        System.out.println(svgFile.getAbsolutePath());
+        System.out.println(imgFile.getAbsolutePath());
     }
 
     private static InvokeChain genInvokeChain(){
