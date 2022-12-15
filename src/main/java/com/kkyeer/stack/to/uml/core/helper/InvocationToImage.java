@@ -24,7 +24,7 @@ public class InvocationToImage {
      * @throws IOException if error occurs while write to outputStream
      * @return
      */
-    public static File generateRandomFile(InvokeChain invokeChain) throws IOException {
+    public static File generateRandomFile(InvokeChain invokeChain,ImageType imageType) throws IOException {
         String plantUMLText = InvocationChainToPlantUmlHelper.generatePlantUmlText(invokeChain);
         SourceStringReader reader = new SourceStringReader(plantUMLText);
         File imgFile = new File(UUID.randomUUID()+"."+imageType.getSuffix());
