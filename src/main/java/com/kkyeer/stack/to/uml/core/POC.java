@@ -1,11 +1,12 @@
 package com.kkyeer.stack.to.uml.core;
 
+import com.kkyeer.stack.to.uml.core.disp.SVGDisplayPanel;
 import com.kkyeer.stack.to.uml.core.helper.ImageType;
 import com.kkyeer.stack.to.uml.core.model.Invocation;
 import com.kkyeer.stack.to.uml.core.model.InvokeChain;
 import com.kkyeer.stack.to.uml.core.helper.InvocationToImage;
+
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +19,7 @@ import java.util.List;
  * @Modified By:
  */
 public class POC {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         // String plantUMLText = "@startuml\n" +
         //         "Alice -> Bob: Authentication Request\n" +
         //         "Bob --> Alice: Authentication Response\n" +
@@ -28,7 +29,9 @@ public class POC {
         //         "@enduml";
         InvokeChain invokeChain = genInvokeChain();
         File imgFile = InvocationToImage.generateRandomFile(invokeChain, ImageType.SVG);
-
+        SVGDisplayPanel umlDisplay = new SVGDisplayPanel(imgFile);
+        umlDisplay.show();
+        Thread.sleep(1000000);
         // The XML is stored into svg
         System.out.println(imgFile.getAbsolutePath());
     }
