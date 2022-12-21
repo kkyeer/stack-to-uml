@@ -6,6 +6,7 @@ import com.kkyeer.stack.to.uml.core.model.Invocation;
 import com.kkyeer.stack.to.uml.core.model.InvokeChain;
 import com.kkyeer.stack.to.uml.core.helper.InvocationToImage;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +31,10 @@ public class POC {
         InvokeChain invokeChain = genInvokeChain();
         File imgFile = InvocationToImage.generateRandomFile(invokeChain, ImageType.SVG);
         SVGDisplayPanel umlDisplay = new SVGDisplayPanel(imgFile);
-        umlDisplay.show();
+        JFrame jFrame = new JFrame();
+        jFrame.setSize(1000,1000);
+        umlDisplay.createPanel(jFrame.getContentPane());
+        jFrame.setVisible(true);
         Thread.sleep(1000000);
         // The XML is stored into svg
         System.out.println(imgFile.getAbsolutePath());

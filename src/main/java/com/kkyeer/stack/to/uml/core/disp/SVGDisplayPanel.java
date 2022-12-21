@@ -21,7 +21,7 @@ public class SVGDisplayPanel {
 
     private JSVGCanvas canvas;
 
-    private static JFrame frame;
+    private Container parent;
 
 
 
@@ -29,10 +29,11 @@ public class SVGDisplayPanel {
         this.imgFile = imgFile;
     }
 
-    public JComponent createPanel(){
+    public JComponent createPanel(Container parent){
+        this.parent = parent;
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout(0, 0));
-        panel.setSize(400,400);
+        panel.setSize(1000,500);
         JSVGCanvas jsvgCanvas = new JSVGCanvas();
         jsvgCanvas.setSize(200,200);
 
@@ -47,6 +48,7 @@ public class SVGDisplayPanel {
         JMenuBar menuBar = new JMenuBar();
         configureMenuBar(menuBar);
         panel.add(menuBar, BorderLayout.NORTH);
+        parent.add(panel);
         return panel;
     }
 
@@ -56,7 +58,7 @@ public class SVGDisplayPanel {
         saveBtn.setVisible(true);
         saveBtn.addActionListener(
                 e -> {
-                    configureFileChooser(frame);
+                    configureFileChooser(parent);
                 }
         );
         menuBar.add(saveBtn);
@@ -90,14 +92,5 @@ public class SVGDisplayPanel {
                 e.printStackTrace();
             }
         }
-    }
-
-    public void show(){
-        JFrame jFrame = new JFrame();
-        SVGDisplayPanel.frame = jFrame;
-        jFrame.setSize(1000,1000);
-        jFrame.getContentPane().add(createPanel());
-        jFrame.setVisible(true);
-
     }
 }
