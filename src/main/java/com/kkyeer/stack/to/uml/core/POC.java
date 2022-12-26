@@ -1,6 +1,7 @@
 package com.kkyeer.stack.to.uml.core;
 
 import com.kkyeer.stack.to.uml.core.disp.SVGDisplayPanel;
+import com.kkyeer.stack.to.uml.core.disp.SwingNativeDisplayPanel;
 import com.kkyeer.stack.to.uml.core.helper.ImageType;
 import com.kkyeer.stack.to.uml.core.model.Invocation;
 import com.kkyeer.stack.to.uml.core.model.InvokeChain;
@@ -30,10 +31,11 @@ public class POC {
         //         "@enduml";
         InvokeChain invokeChain = genInvokeChain();
         File imgFile = InvocationToImage.generateRandomFile(invokeChain, ImageType.SVG);
-        SVGDisplayPanel umlDisplay = new SVGDisplayPanel(imgFile);
         JFrame jFrame = new JFrame();
+        SVGDisplayPanel umlDisplay = new SwingNativeDisplayPanel(imgFile, jFrame.getContentPane());
         jFrame.setSize(1000,1000);
-        umlDisplay.createPanel(jFrame.getContentPane());
+        JComponent panel = umlDisplay.createPanel();
+        jFrame.getContentPane().add(panel);
         jFrame.setVisible(true);
         Thread.sleep(1000000);
         // The XML is stored into svg
